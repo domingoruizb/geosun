@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* ─── MapLibre overrides ─── */
+.maplibregl-canvas { outline: none; }
+.maplibregl-ctrl-attrib { font-size: 10px !important; }
+.maplibregl-ctrl-group { background: #1e293b !important; border: 1px solid #334155 !important; }
+.maplibregl-ctrl-group button { background-color: transparent !important; color: #94a3b8 !important; }
+.maplibregl-ctrl-group button:hover { background-color: #334155 !important; color: #fff !important; }
+
+/* ─── User location marker (círculo azul radiante) ─── */
+.user-location-marker {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.user-dot {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+.user-dot-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.25);
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%       { transform: scale(2); opacity: 0; }
+}
+
+/* ─── Member markers (avatares circulares) ─── */
+.member-marker {
+  position: relative;
+  cursor: pointer;
+}
+
+.member-avatar-img,
+.member-avatar-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2.5px solid #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  object-fit: cover;
+}
+
+.member-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #f1f5f9;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  border: 1px solid #334155;
+}
+
+.member-marker:hover .member-tooltip {
+  opacity: 1;
+}
