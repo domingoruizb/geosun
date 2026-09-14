@@ -1,6 +1,8 @@
 import { createClient } from '@/lib/supabase/server';
 import { DashboardClient } from './DashboardClient';
 
+export const dynamic = 'force-dynamic';
+
 interface MembershipRow {
   color_hue: number;
   role: string;
