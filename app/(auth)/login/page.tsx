@@ -1,19 +1,41 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { MapPin, Mail, Loader2 } from 'lucide-react';
+import { MapPin, Mail, Lock, Loader2 } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handlePasswordLogin(e: React.FormEvent) {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    setLoading(false);
+    if (error) {
+      setError(error.message);
+    } else {
+      router.push('/dashboard');
+    }
+  }
+
+  async function handleMagicLink() {
+    if (!email) {
+      setError('Introduce tu email antes de enviar el enlace mágico.');
+      return;
+    }
     setLoading(true);
     setError(null);
 
@@ -70,7 +92,7 @@ export default function LoginPage() {
       </div>
 
       {/* Formulario */}
-      <form onSubmit={handleSubmit} className="flex w-full max-w-sm flex-col gap-4">
+      <form onSubmit={handlePasswordLogin} className="flex w-full max-w-sm flex-col gap-4">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="email" className="text-sm font-medium text-slate-300">
             Email
@@ -86,6 +108,20 @@ export default function LoginPage() {
           />
         </div>
 
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="password" className="text-sm font-medium text-slate-300">
+            Contraseña <span className="text-slate-500">(opcional)</span>
+          </label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Tu contraseña"
+            className="rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-3 text-white placeholder-slate-500 ring-offset-slate-950 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
+          />
+        </div>
+
         {error && (
           <p className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-400 ring-1 ring-red-500/20">
             {error}
@@ -94,24 +130,40 @@ export default function LoginPage() {
 
         <button
           type="submit"
-          disabled={loading || !email}
+          disabled={loading || !email || !password}
           className="flex items-center justify-center gap-2 rounded-xl bg-blue-500 px-4 py-3 font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />
-              Enviando...
+              Entrando...
             </>
           ) : (
             <>
-              <Mail className="h-4 w-4" />
-              Continuar con Magic Link
+              <Lock className="h-4 w-4" />
+              Entrar con contraseña
             </>
           )}
         </button>
 
+        <div className="flex items-center gap-3">
+          <hr className="flex-1 border-slate-700" />
+          <span className="text-xs text-slate-500">o</span>
+          <hr className="flex-1 border-slate-700" />
+        </div>
+
+        <button
+          type="button"
+          onClick={handleMagicLink}
+          disabled={loading}
+          className="flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-3 font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <Mail className="h-4 w-4" />
+          Enviar enlace mágico
+        </button>
+
         <p className="text-center text-xs text-slate-500">
-          Recibirás un enlace de acceso en tu email. Sin contraseñas.
+          Sin contraseña, recibirás un enlace de acceso en tu email.
         </p>
       </form>
     </div>
