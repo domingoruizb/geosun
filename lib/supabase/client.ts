@@ -8,8 +8,8 @@ import { createBrowserClient } from '@supabase/ssr';
 // las vars NEXT_PUBLIC_* aún no están embebidas) para evitar un throw fatal.
 // En producción las vars reales son inyectadas por Next.js en el bundle.
 export function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'https://placeholder.supabase.co',
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? 'placeholder-anon-key-for-build',
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key';
+
+  return createBrowserClient(url, anonKey);
 }
