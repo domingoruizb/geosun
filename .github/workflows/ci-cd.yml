@@ -66,14 +66,18 @@ jobs:
           node-version: 20
           cache: npm
 
-      # Crear .vercel/project.json antes del pull para que el CLI
-      # pueda resolver el proyecto sin necesitar un linking interactivo.
-      # Esto resuelve "Could not retrieve Project Settings" cuando los
-      # secrets VERCEL_ORG_ID y VERCEL_PROJECT_ID están correctamente definidos.
+      # Escribir .vercel/project.json con heredoc para garantizar JSON válido.
+      # Actions expande ${{ }} antes de que bash ejecute el script,
+      # por lo que 'EOF' (sin expansión de $shell) es seguro aquí.
       - name: Link Vercel project
         run: |
           mkdir -p .vercel
-          echo "{\"orgId\":\"${{ secrets.VERCEL_ORG_ID }}\",\"projectId\":\"${{ secrets.VERCEL_PROJECT_ID }}\"}" > .vercel/project.json
+          cat << 'EOF' > .vercel/project.json
+          {
+            "orgId": "${{ secrets.VERCEL_ORG_ID }}",
+            "projectId": "${{ secrets.VERCEL_PROJECT_ID }}"
+          }
+          EOF
 
       - name: Pull Vercel environment
         run: npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
