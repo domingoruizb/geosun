@@ -28,12 +28,12 @@ export function GroupCard({ id, name, description, memberCount, colorHue }: Grou
       {/* Info */}
       <div className="min-w-0 flex-1">
         <p className="truncate font-semibold text-white">{name}</p>
-        {description && (
-          <p className="mt-0.5 truncate text-sm text-slate-400">{description}</p>
-        )}
+        {description && <p className="mt-0.5 truncate text-sm text-slate-400">{description}</p>}
         <div className="mt-1 flex items-center gap-1 text-xs text-slate-500">
           <Users className="h-3 w-3" />
-          <span>{memberCount} {memberCount === 1 ? 'miembro' : 'miembros'}</span>
+          <span>
+            {memberCount} {memberCount === 1 ? 'miembro' : 'miembros'}
+          </span>
         </div>
       </div>
 

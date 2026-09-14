@@ -19,9 +19,7 @@ interface MessageBubbleProps {
 
 export function MessageBubble({ message, isOwn, showAvatar }: MessageBubbleProps) {
   if (message.type === 'system') {
-    return (
-      <div className="my-1 text-center text-xs text-slate-500">{message.content}</div>
-    );
+    return <div className="my-1 text-center text-xs text-slate-500">{message.content}</div>;
   }
 
   const time = new Date(message.createdAt).toLocaleTimeString('es', {
@@ -54,7 +52,10 @@ export function MessageBubble({ message, isOwn, showAvatar }: MessageBubbleProps
       </div>
       <div className="flex flex-col gap-0.5">
         {showAvatar && (
-          <span className="ml-0.5 text-xs font-medium" style={{ color: `hsl(${message.colorHue} 65% 65%)` }}>
+          <span
+            className="ml-0.5 text-xs font-medium"
+            style={{ color: `hsl(${message.colorHue} 65% 65%)` }}
+          >
             {message.username}
           </span>
         )}

@@ -23,9 +23,7 @@ export default async function DashboardPage() {
     .eq('user_id', user!.id)
     .order('joined_at', { ascending: false })) as { data: MembershipRow[] | null };
 
-  const groupIds = (memberships ?? [])
-    .map((m) => m.groups?.id)
-    .filter(Boolean) as string[];
+  const groupIds = (memberships ?? []).map((m) => m.groups?.id).filter(Boolean) as string[];
 
   const { data: memberCounts } = (
     groupIds.length

@@ -75,7 +75,12 @@ export function GeoLiveClient({ groupId, currentUserId, members }: GeoLiveClient
       .channel(`group:${groupId}:locations`)
       .on(
         'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'location_logs', filter: `group_id=eq.${groupId}` },
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'location_logs',
+          filter: `group_id=eq.${groupId}`,
+        },
         (payload) => {
           const row = payload.new as RealtimeLocationRow;
           if (row.user_id === currentUserId) return;
@@ -111,9 +116,11 @@ export function GeoLiveClient({ groupId, currentUserId, members }: GeoLiveClient
           setMapLoaded(true);
         }}
       >
-        <div className="absolute right-3 top-3 z-10 flex flex-col gap-2">
+        <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
           <button
-            onClick={() => myPosition && mapRef.current?.flyTo([myPosition.longitude, myPosition.latitude], 17)}
+            onClick={() =>
+              myPosition && mapRef.current?.flyTo([myPosition.longitude, myPosition.latitude], 17)
+            }
             disabled={!myPosition}
             className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900/90 text-slate-300 shadow-lg ring-1 ring-slate-700 backdrop-blur-sm transition hover:text-white disabled:opacity-40"
             title="Centrar en mi posición"
@@ -123,14 +130,14 @@ export function GeoLiveClient({ groupId, currentUserId, members }: GeoLiveClient
         </div>
 
         {geoError && (
-          <div className="absolute left-1/2 top-3 z-10 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-red-900/90 px-3 py-2 text-sm text-red-200 shadow-lg ring-1 ring-red-700 backdrop-blur-sm">
+          <div className="absolute top-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-red-900/90 px-3 py-2 text-sm text-red-200 shadow-lg ring-1 ring-red-700 backdrop-blur-sm">
             <WifiOff className="h-4 w-4" />
             GPS no disponible
           </div>
         )}
 
         {!myPosition && !geoError && (
-          <div className="absolute left-1/2 top-3 z-10 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-slate-900/90 px-3 py-2 text-sm text-slate-300 shadow-lg ring-1 ring-slate-700 backdrop-blur-sm">
+          <div className="absolute top-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-slate-900/90 px-3 py-2 text-sm text-slate-300 shadow-lg ring-1 ring-slate-700 backdrop-blur-sm">
             <Crosshair className="h-4 w-4 animate-spin" />
             Obteniendo ubicación...
           </div>

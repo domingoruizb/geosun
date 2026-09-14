@@ -26,7 +26,7 @@ export function GroupTabs({ groupId, groupName }: GroupTabsProps) {
     <>
       <div className="flex shrink-0 items-center justify-between border-b border-slate-800 bg-slate-900 px-2">
         {/* Group name */}
-        <span className="hidden truncate px-2 text-sm font-semibold text-slate-300 sm:block max-w-[140px]">
+        <span className="hidden max-w-[140px] truncate px-2 text-sm font-semibold text-slate-300 sm:block">
           {groupName}
         </span>
 

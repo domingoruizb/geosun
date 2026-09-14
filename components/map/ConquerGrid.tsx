@@ -32,11 +32,15 @@ function cellsToGeoJSON(cells: CellData[]): GeoJSON.FeatureCollection {
         type: 'Feature',
         geometry: {
           type: 'Polygon',
-          coordinates: [[
-            [b.swLng, b.swLat], [b.neLng, b.swLat],
-            [b.neLng, b.neLat], [b.swLng, b.neLat],
-            [b.swLng, b.swLat],
-          ]],
+          coordinates: [
+            [
+              [b.swLng, b.swLat],
+              [b.neLng, b.swLat],
+              [b.neLng, b.neLat],
+              [b.swLng, b.neLat],
+              [b.swLng, b.swLat],
+            ],
+          ],
         },
         properties: {
           ownerId: cell.owner_id,

@@ -43,10 +43,19 @@ async function rpcCall<T>(
   fn: string,
   args: Record<string, unknown>,
 ): Promise<{ data: T | null; error: unknown }> {
-  return (supabase.rpc as unknown as (fn: string, args: Record<string, unknown>) => Promise<{ data: T | null; error: unknown }>)(fn, args);
+  return (
+    supabase.rpc as unknown as (
+      fn: string,
+      args: Record<string, unknown>,
+    ) => Promise<{ data: T | null; error: unknown }>
+  )(fn, args);
 }
 
-export function GeoConquerClient({ groupId, currentUserId, initialRanking }: GeoConquerClientProps) {
+export function GeoConquerClient({
+  groupId,
+  currentUserId,
+  initialRanking,
+}: GeoConquerClientProps) {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapInstance, setMapInstance] = useState<MapLibreMap | null>(null);
   const [myPosition, setMyPosition] = useState<GeoPosition | null>(null);
@@ -199,7 +208,7 @@ export function GeoConquerClient({ groupId, currentUserId, initialRanking }: Geo
 
       {mapLoaded && mapInstance && <ConquerGrid map={mapInstance} cells={cells} />}
 
-      <div className="absolute bottom-0 left-0 right-0 z-10">
+      <div className="absolute right-0 bottom-0 left-0 z-10">
         <div className="flex items-center justify-between bg-slate-900/95 px-4 py-2 backdrop-blur-sm">
           <div className="flex items-center gap-2">
             <Trophy className="h-4 w-4 text-yellow-400" />

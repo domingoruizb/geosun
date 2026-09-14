@@ -20,7 +20,7 @@ export interface BBox {
  * Proyecta coordenadas GPS (WGS84) a índice de celda en cuadrícula Web Mercator de 100m.
  */
 export function lngLatToCellIndex(lng: number, lat: number): CellIndex {
-  const x = EARTH_RADIUS * (lng * Math.PI) / 180;
+  const x = (EARTH_RADIUS * (lng * Math.PI)) / 180;
   const y = EARTH_RADIUS * Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
   return {
     cellX: Math.floor(x / CELL_SIZE_M),
@@ -48,18 +48,13 @@ export function cellIndexToBBox(cellX: number, cellY: number): BBox {
 /**
  * Distancia entre dos puntos GPS en metros (fórmula Haversine).
  */
-export function haversineDistance(
-  lat1: number, lon1: number,
-  lat2: number, lon2: number,
-): number {
+export function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = EARTH_RADIUS;
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLon = ((lon2 - lon1) * Math.PI) / 180;
   const a =
     Math.sin(dLat / 2) ** 2 +
-    Math.cos((lat1 * Math.PI) / 180) *
-    Math.cos((lat2 * Math.PI) / 180) *
-    Math.sin(dLon / 2) ** 2;
+    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
@@ -68,8 +63,10 @@ export function haversineDistance(
  * Umbral: 50 m/s (~180 km/h).
  */
 export function isTeleporting(
-  prevLat: number, prevLon: number,
-  currLat: number, currLon: number,
+  prevLat: number,
+  prevLon: number,
+  currLat: number,
+  currLon: number,
   dtMs: number,
 ): boolean {
   if (dtMs <= 0) return false;

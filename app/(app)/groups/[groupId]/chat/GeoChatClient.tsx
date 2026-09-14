@@ -47,7 +47,12 @@ interface GeoChatClientProps {
 
 const PAGE_SIZE = 40;
 
-export function GeoChatClient({ groupId, currentUserId, initialMessages, colorMap }: GeoChatClientProps) {
+export function GeoChatClient({
+  groupId,
+  currentUserId,
+  initialMessages,
+  colorMap,
+}: GeoChatClientProps) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(initialMessages.length === PAGE_SIZE);

@@ -13,7 +13,12 @@ interface ProfileClientProps {
   avatarUrl: string | null;
 }
 
-export function ProfileClient({ userId, email, username: initialUsername, avatarUrl }: ProfileClientProps) {
+export function ProfileClient({
+  userId,
+  email,
+  username: initialUsername,
+  avatarUrl,
+}: ProfileClientProps) {
   const [username, setUsername] = useState(initialUsername);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -61,7 +66,7 @@ export function ProfileClient({ userId, email, username: initialUsername, avatar
             minLength={3}
             maxLength={30}
             required
-            className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
+            className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
           />
         </div>
 

@@ -13,7 +13,15 @@ interface MemberMarkerProps {
   colorHue: number;
 }
 
-export function MemberMarker({ map, userId, latitude, longitude, username, avatarUrl, colorHue }: MemberMarkerProps) {
+export function MemberMarker({
+  map,
+  userId,
+  latitude,
+  longitude,
+  username,
+  avatarUrl,
+  colorHue,
+}: MemberMarkerProps) {
   const markerRef = useRef<Marker | null>(null);
 
   useEffect(() => {

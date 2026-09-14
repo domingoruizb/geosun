@@ -63,14 +63,14 @@ export function JoinGroupModal({ onClose }: JoinGroupModalProps) {
           <div className="flex flex-col gap-1.5">
             <label className="text-sm font-medium text-slate-300">Código de invitación</label>
             <div className="relative">
-              <Hash className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+              <Hash className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-500" />
               <input
                 value={code}
                 onChange={(e) => setCode(e.target.value.toUpperCase())}
                 placeholder="AB12CD34"
                 required
                 maxLength={8}
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-3 pl-9 pr-4 font-mono tracking-widest text-white placeholder-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
+                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-3 pr-4 pl-9 font-mono tracking-widest text-white placeholder-slate-500 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
               />
             </div>
           </div>

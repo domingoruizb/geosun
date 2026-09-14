@@ -89,7 +89,12 @@ export function GeoHeatClient({ groupId, initialPoints }: GeoHeatClientProps) {
       .channel(`group:${groupId}:heat`)
       .on(
         'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'location_logs', filter: `group_id=eq.${groupId}` },
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'location_logs',
+          filter: `group_id=eq.${groupId}`,
+        },
         (payload) => {
           const row = payload.new as RealtimeLocationRow;
           const pt = parseGeomPoint(row.geom);
@@ -111,7 +116,7 @@ export function GeoHeatClient({ groupId, initialPoints }: GeoHeatClientProps) {
 
       {mapLoaded && mapInstance && <HeatmapLayer map={mapInstance} points={points} />}
 
-      <div className="absolute left-3 top-3 z-10 flex items-center gap-2 rounded-xl bg-slate-900/90 px-3 py-2 text-sm text-slate-300 shadow-lg ring-1 ring-slate-700 backdrop-blur-sm">
+      <div className="absolute top-3 left-3 z-10 flex items-center gap-2 rounded-xl bg-slate-900/90 px-3 py-2 text-sm text-slate-300 shadow-lg ring-1 ring-slate-700 backdrop-blur-sm">
         <Flame className="h-4 w-4 text-orange-400" />
         <span>{pointCount.toLocaleString('es')} puntos</span>
       </div>

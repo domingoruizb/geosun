@@ -31,7 +31,5 @@ export default async function GeoLivePage({ params }: PageProps) {
     avatarUrl: m.profiles?.avatar_url ?? null,
   }));
 
-  return (
-    <GeoLiveClient groupId={groupId} currentUserId={user!.id} members={membersData} />
-  );
+  return <GeoLiveClient groupId={groupId} currentUserId={user!.id} members={membersData} />;
 }

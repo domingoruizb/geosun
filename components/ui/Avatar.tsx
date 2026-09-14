@@ -8,7 +8,13 @@ interface AvatarProps {
 
 const sizes = { sm: 'h-7 w-7 text-xs', md: 'h-9 w-9 text-sm', lg: 'h-12 w-12 text-base' };
 
-export function Avatar({ username, avatarUrl, colorHue = 210, size = 'md', className = '' }: AvatarProps) {
+export function Avatar({
+  username,
+  avatarUrl,
+  colorHue = 210,
+  size = 'md',
+  className = '',
+}: AvatarProps) {
   const initial = username[0]?.toUpperCase() ?? '?';
   const bg = `hsl(${colorHue} 70% 45%)`;
 

@@ -72,7 +72,9 @@ export function InviteModal({ groupId, groupName, onClose }: InviteModalProps) {
         )}
 
         {copied && (
-          <p className="mt-2 text-center text-xs text-green-400">¡Código copiado al portapapeles!</p>
+          <p className="mt-2 text-center text-xs text-green-400">
+            ¡Código copiado al portapapeles!
+          </p>
         )}
       </div>
     </div>

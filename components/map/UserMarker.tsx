@@ -47,9 +47,13 @@ export function UserMarker({ map, latitude, longitude, accuracy }: UserMarkerPro
         paint: {
           // circle-radius en píxeles aproximado para la precisión GPS
           'circle-radius': [
-            'interpolate', ['exponential', 2], ['zoom'],
-            0, 0,
-            20, accuracy / 0.1,
+            'interpolate',
+            ['exponential', 2],
+            ['zoom'],
+            0,
+            0,
+            20,
+            accuracy / 0.1,
           ] as unknown as number,
           'circle-color': '#3b82f6',
           'circle-opacity': 0.12,

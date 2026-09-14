@@ -44,7 +44,9 @@ export function ConquerLeaderboard({ ranking, currentUserId }: ConquerLeaderboar
               colorHue={entry.colorHue}
               size="sm"
             />
-            <span className={`flex-1 truncate text-sm font-medium ${isMe ? 'text-blue-300' : 'text-slate-200'}`}>
+            <span
+              className={`flex-1 truncate text-sm font-medium ${isMe ? 'text-blue-300' : 'text-slate-200'}`}
+            >
               {entry.username}
               {isMe && <span className="ml-1 text-xs text-blue-500">(tú)</span>}
             </span>

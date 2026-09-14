@@ -81,7 +81,7 @@ export function CreateGroupModal({ onClose }: CreateGroupModalProps) {
               placeholder="Amigos del barrio"
               required
               maxLength={50}
-              className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
+              className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
             />
           </div>
 
@@ -95,7 +95,7 @@ export function CreateGroupModal({ onClose }: CreateGroupModalProps) {
               placeholder="Un grupo para..."
               maxLength={200}
               rows={2}
-              className="resize-none rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
+              className="resize-none rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40"
             />
           </div>
 
