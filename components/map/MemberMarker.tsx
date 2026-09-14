@@ -46,7 +46,6 @@ export function MemberMarker({ map, userId, latitude, longitude, username, avata
       markerRef.current?.remove();
       markerRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;
